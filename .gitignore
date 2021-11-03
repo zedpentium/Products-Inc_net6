@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+.vs/*
+Products-Inc/bin/*
+Products-Inc/obj/*
+Products-Inc/Properties/*
+/PeopleMVC
+/Products-Inc/node_modules
+/Products-Inc/wwwroot/img/W3GJ6FV44U.jpg

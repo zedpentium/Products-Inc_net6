@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="navbar-nav">
+    @if (this.User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <button type="submit" class="nav-link text-dark" asp-area="Identity"  asp-action="Admin">ADMIN</button>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <button type="submit" class="nav-link text-dark" asp-area="Identity"  asp-action="User">MY PAGE</button>
+        </li>
+    }
+</ul>

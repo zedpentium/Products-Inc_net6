@@ -1,0 +1,29 @@
+﻿@{ //ViewData["Title"] = "Home Page";
+}
+
+
+    @{
+        bool isAuthenticated = this.User.Identity.IsAuthenticated;
+        bool isAdmin = this.User.IsInRole("Admin");
+        string userName = this.User.Identity.Name;
+
+        //System.Diagnostics.Debug.WriteLine(userName);
+
+        @Html.ReactRouter("Components.Index", new
+   {
+       userIsAuthenticated = isAuthenticated,
+       userIsAdmin = isAdmin,
+       userNameIs = userName
+   });
+        };
+
+
+@*<div id="reactcontent"></div>*@
+
+
+
+
+
+@Html.ReactInitJavaScript()
+
+

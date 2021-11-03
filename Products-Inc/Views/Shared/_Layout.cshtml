@@ -1,0 +1,41 @@
+﻿@using React.AspNet
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products_Inc</title>
+    <link rel="stylesheet" href="~/css/bootstrap-5.0.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css"/>
+    <link href="~/css/productsStyle.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+
+    @RenderBody()
+
+
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/css/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="~/js/updateidentitypartial.js"></script>
+
+
+    <script src="~/reactjs/dist/runtime.js"></script>
+    <script src="~/reactjs/dist/vendor.js"></script>
+    <script src="~/reactjs/dist/main.js"></script>
+
+
+    @Html.ReactInitJavaScript()
+
+
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts");
+    }
+
+
+</body>
+</html>

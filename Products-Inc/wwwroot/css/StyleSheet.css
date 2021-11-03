@@ -1,0 +1,537 @@
+﻿body {
+    position: relative;
+    width: 1024px;
+    height: 4000px;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color:white;
+}
+
+
+
+.item-header {
+    grid-area: headerarea;
+    position: fixed;
+    height: 95px;
+    width: 1024px;
+    background-color: #dc3545;
+    /*border: 1px solid black;*/
+    z-index: 900;
+}
+
+
+.item-reactcontent {
+    grid-area: content;
+    color: #000
+    /*    border: 1px solid black;*/
+}
+
+.item-footer {
+    grid-area: footerarea;
+    position: fixed;
+    bottom: 0px;
+    width: 1024px;
+    white-space: nowrap;
+    background-color: #dc3545;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+
+.pagewrapper {
+    height: 4000px;
+    /*    color: black;*/
+    background-color: #87898A;
+    display: grid;
+    grid-template-columns: 200px 800px;
+    grid-template-rows: 95px 1000px 60px;
+    grid-template-areas:
+        'headerarea headerarea'
+        'content content'
+        'footerarea footerarea';
+}
+
+#navmenubox {
+    height: 120px;
+}
+
+#menulogo {
+    height: 95px;
+    margin-right: auto;
+    padding: 0px;
+}
+
+
+    #menulogo img {
+        width: 120px;
+        height: auto;
+    }
+
+.navbar {
+    border: none;
+}
+
+.navbar-brand {
+    border: none;
+}
+
+.navbar-nav {
+    color: white;
+}
+
+    .navbar-nav .nav-item {
+        border: none;
+    }
+
+    .navbar-nav .nav-link {
+        border: none;
+        color: white;
+    }
+
+
+.identitybox {
+    position: fixed;
+    padding: 2em;
+    left: 65%;
+    top: 0%;
+    transform: translateX(-50%);
+    /*    background-color: black;
+    color: white;*/
+    z-index: 990;
+}
+
+
+
+.identityloginout {
+    position: fixed;
+    padding: 0em;
+    left: 70%;
+    top: 15%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white !important;
+    z-index: 990;
+}
+
+.formlogin {
+    width: 400px;
+    z-index: 990;
+}
+
+#adminorderslist {
+    border: 1px solid #D8D8D8;
+    width: 90%;
+    padding: 10px;
+    margin: auto;
+}
+
+/*#clickabletablerow {  // this was for clickable table rows.. but that action dident work out
+    cursor: pointer;
+}
+*/
+
+/*.container {
+    padding: 0px;
+    margin-top: -17px;
+}*/
+
+.optionBtnGreen {
+    background-color: #2CD32C;
+    color: black !important;
+    border: 3px solid #000
+}
+
+.optionBtnBlue {
+    background-color: blue;
+    border: 3px solid #000
+}
+
+.optionBtnRed {
+    background-color: red;
+    border: 3px solid #000
+}
+
+.optionBtnGray {
+    background-color: dimgray;
+    border: 3px solid #000;
+    color: black !important;
+}
+
+.optionBtnGray a {
+    color: black !important;
+}
+
+.productamount {
+    width: 60px;
+}
+
+
+
+/*
+    Ramya CSS code 
+*/
+/*carosel style below here */
+.carouselImage {
+    height: 300px;
+    width: 100%;
+}
+
+.quotes {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+
+.content {
+    margin: -16px -24px 0px 0px;
+}
+
+/*CSS to Products.jsx file*/
+.wrapper {
+    display: grid;
+    grid-template-columns: 150px 100px;
+    grid-template-rows: 5px auto auto 5px;
+    color:white;
+}
+.wrapper .product-info{
+    grid-row: 2/3;
+}
+.wrapper .product-input{
+    grid-row: 3/4;
+}
+.wrapper input{
+    width: 60%;
+}
+.product {
+    width: 20vw;
+    padding: 3px;
+    padding: 20px 20px 20px 20px;
+}
+
+.product:hover {
+    border: 1px solid white;
+}
+
+.product-img {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    height: 250px;
+}
+
+.contents {
+    color: black;
+    text-align-last: left;
+    line-height: 3px;
+}
+
+
+/*dropdown menu styling in the Header*/
+
+.dropbtn {
+    background-color: #dc3545;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #dc3545;
+    opacity: .8;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #dc3545
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #dc3545;
+}
+
+/*Register page Css*/
+.btn {
+    background-color: #dc3545;
+    float: right;
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+    .btn:hover {
+        color: white;
+        background-color: #3e8e41
+    }
+
+
+    .btn:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.addButton {
+    margin: 20px;
+}
+.registerBtnDiv {
+    float:left;
+    padding-left: 210px;
+    color:white;
+}
+.form-group {
+    margin-bottom: 20px;
+    width: 400px;
+    padding-left: 100px;
+    color:white;
+}
+
+/*Css to Login.jsx*/
+.form-check {
+    padding-left: 120px;
+    color:white;
+}
+.logInBtnDiv {
+    float: left;
+    padding-left: 210px;
+}
+.submitButton {
+    float: left;
+    background-color: #dc3545;
+}
+
+/*Css to UserDetails.jsx*/
+.savePasswordButtonDiv {
+    padding-left: 180px;
+}
+
+/*Css to ContactUs.jsx*/
+.contact_us_contents{
+    color:white;
+    padding-left:100px;
+}
+
+/*Css To AdminProducts*/
+.admineditorder_img {
+    width: 70px;
+    height: 70px;
+}
+.showEditButton {
+    background-color: #dc3545;
+    color:white;
+}
+.table{
+    margin-left:12px;
+}
+.allProductBtn{
+    float:left;
+    margin-left:100px;
+}
+.createProductBtn {
+    float: left;
+    margin-left: 130px;
+}
+.createBtnDiv {
+    float: left;
+    margin-left: 210px;
+}
+.editProductImg{
+    width:300px;
+    height:200px;
+}
+.ButtonsEditProducts {
+    margin-right: 118px;
+}
+.backBtn{
+    margin-right: 16px;
+}
+.deleteBtn {
+    margin-right: 16px;
+}
+
+/*
+Ramya CSS code
+*/
+/*carosel style below here */
+.carouselImage {
+    height: 300px;
+    width: 100%;
+}
+
+
+
+.quotes {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+
+
+
+.content {
+    margin: -16px -24px 0px 0px;
+}
+
+
+
+/*CSS to Products.jsx file*/
+.wrapper {
+    display: grid;
+    grid-template-columns: 150px 100px;
+    color: white;
+}
+
+.product {
+    width: 20vw;
+    padding: 3px;
+    padding: 20px 20px 20px 20px;
+}
+
+
+
+    .product:hover {
+        border: 1px solid white;
+    }
+
+
+
+.product-img {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    height: 250px;
+}
+
+
+
+.contents {
+    color: black;
+    text-align-last: left;
+    line-height: 3px;
+}
+
+
+
+
+/*dropdown menu styling in the Header*/
+
+
+
+.dropbtn {
+    background-color: #dc3545;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #dc3545;
+    opacity: .8;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+
+
+        .dropdown-content a:hover {
+            background-color: #dc3545
+        }
+
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*Adding CSs to User Details Pages*/
+.myDetailsBtn{
+    margin-bottom:30px;
+    margin-right:100px;
+}
+.userDetailsRow{
+    padding-left:22px;
+}
+.totalPriceCheckoutDiv h3{
+    color:white;
+}
+Link{
+    text-decoration:none;
+}
+.editUserPageRoles{
+    color:white;
+    padding-left:100px;
+}
+.myOrdersBtn{
+    width:130px;
+}
+.orderSucessPage{
+    color:white;
+    text-align:center;
+}
+.orderSucessPage ul{
+    list-style-type:none;
+}
+.printReciptBtn {
+    margin-right: 130px;
+}
+.addNumberOfItems {
+    width: 50px;
+    margin-right: 5px;
+}
+.loginPartialDiv{
+    color:white;
+}
+/*Admin Edit Orders*/
+.adminEditOrder{
+    color:white;
+    margin-left:100px;
+}
+.backBtn{
+    text-decoration:none;
+}
+.saveAndBackBtnDiv{
+    margin-right:50px;
+}

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+    <div id="identitybox">
+        <div class="navbar-nav">
+
+            <div id="identitymessage"></div>
+            <div id="identitybuttons"></div>
+
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <script type="text/javascript">
+                    ChangeIdentityPartialViewMessage("Hello @User.Identity.Name!")
+
+                </script>
+
+            }
+            else
+            {
+                <script type="text/javascript">
+                    ChangeIdentityPartialViewMessage("You need to login")
+                </script>
+
+            }
+        </div>
+    </div>

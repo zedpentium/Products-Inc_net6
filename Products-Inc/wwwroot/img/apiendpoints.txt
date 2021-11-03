@@ -1,0 +1,136 @@
+PRODUCTS:
+
+POST:
+api/product  
+body:
+{
+ "productName": "toothpaste",
+  "productDescription": "cool toothpaste",
+  "productPrice": 120,
+  "imgPath": "",
+}
+
+GET:
+path: api/product  
+returns:
+[
+ {
+      "productName": "toothpaste",
+      "productDescription": "cool toothpaste",
+      "productPrice": 120,
+      "imgPath": "",
+      "productId": 1
+    },
+    {
+      "productName": "dogfood",
+      "productDescription": "cool dogfood",
+      "productPrice": 25,
+      "imgPath": "",
+      "productId": 2
+    }
+]
+
+path: api/product/{id}
+returns:
+{
+      "productName": "toothpaste",
+      "productDescription": "cool toothpaste",
+      "productPrice": 120,
+      "imgPath": "",
+      "productId": 1
+}
+
+
+DELETE:
+path: api/product/{id}
+returns: 200 OK / 404 NOT FOUND
+----------------------------
+ORDERS:
+
+GET:
+
+path: api/orders
+returns:
+[
+  {
+    "orderId": "7",
+    "userId": "1",
+    "products": [
+      {
+        "productName": "toothpaste",
+        "productDescription": "cool toothpaste",
+        "productPrice": 120,
+        "imgPath": "",
+        "productId": 0
+      }
+    ]
+  },
+  {
+    "orderId": "8",
+    "userId": "1",
+    "products": [
+      {
+        "productName": "toothpaste",
+        "productDescription": "cool toothpaste",
+        "productPrice": 120,
+        "imgPath": "",
+        "productId": 0
+      }
+    ]
+  },
+  {
+    "orderId": "9",
+    "userId": "1",
+    "products": [
+      {
+        "productName": "toothpaste",
+        "productDescription": "cool toothpaste",
+        "productPrice": 120,
+        "imgPath": "",
+        "productId": 0
+      },
+      {
+        "productName": "toothpaste",
+        "productDescription": "cool toothpaste",
+        "productPrice": 120,
+        "imgPath": "",
+        "productId": 0
+      }
+    ]
+  }
+]
+
+path: /api/orders/users/{id}
+returns:
+[ list of all orders with matching userId ]
+
+POST:
+
+path: api/orders
+body: 
+{
+  "productIds": [1, 2],
+  "UserId": 1
+}
+returns:
+{
+  "orderId": "9",
+  "userId": "1",
+  "products": [
+    {
+      "productName": "toothpaste",
+      "productDescription": "cool toothpaste",
+      "productPrice": 120,
+      "imgPath": "",
+      "productId": 1
+    },
+    {
+      "productName": "toothpaste",
+      "productDescription": "cool toothpaste",
+      "productPrice": 120,
+      "imgPath": "",
+      "productId": 2
+    }
+  ]
+}
+
