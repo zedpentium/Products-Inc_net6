@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Products_Inc.Models;
 using Products_Inc.Models.Interfaces;
 using Products_Inc.Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -26,12 +28,24 @@ namespace Products_Inc.Controllers
         }
 
 
+
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         public IActionResult AllProducts()
         {
-            return new OkObjectResult(_productService.ReadAll());
+            List<Product> allProducts = _productService.ReadAll();
+
+            if (ModelState.IsValid)
+            {
+                //Console.WriteLine(allProducts);
+
+                return new OkObjectResult(allProducts);
+            }
+
+            return new BadRequestObjectResult(new { msg = "Error when fetching all Products. " });
         }
+
+
 
         [Authorize]
         [HttpGet("{id}")]
@@ -39,6 +53,8 @@ namespace Products_Inc.Controllers
         {
            return new OkObjectResult(_productService.FindBy(id));
         }
+
+
 
         //[Authorize(Roles = "Admin")]
         [HttpPost]

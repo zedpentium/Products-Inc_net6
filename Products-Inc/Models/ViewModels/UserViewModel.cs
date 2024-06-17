@@ -8,8 +8,8 @@ namespace Products_Inc.Models.ViewModels
         public string Email { get; internal set; }
         public string UserName { get; internal set; }
 
-        public List<string> Roles { get; set; }
+        public IList<string> Roles { get; set; }
 
-        public bool FoundUser { get; set; }
+        //public bool FoundUser { get; set; }
     }
 }

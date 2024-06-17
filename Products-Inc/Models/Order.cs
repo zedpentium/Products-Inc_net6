@@ -28,6 +28,8 @@ namespace Products_Inc.Models
         public User User { get; set; }
         
 
-        public List<OrderProduct> OrderProducts { get; set; } // dotnet core 3.1 many-to-many link
+        public ICollection<Product> Products { get; set; }
+
+        public List<OrderProduct> OrderProducts { get; set; } // many-to-many link
     }
 }

@@ -3,27 +3,26 @@
 
 
     @{
-        bool isAuthenticated = this.User.Identity.IsAuthenticated;
-        bool isAdmin = this.User.IsInRole("Admin");
-        string userName = this.User.Identity.Name;
+        //bool isAuthenticated = this.User.Identity.IsAuthenticated;
+        //bool isAdmin = this.User.IsInRole("Admin");
+        //string userName = this.User.Identity.Name;
+        string userName = "hej du";
 
         //System.Diagnostics.Debug.WriteLine(userName);
 
         @Html.ReactRouter("Components.Index", new
    {
-       userIsAuthenticated = isAuthenticated,
-       userIsAdmin = isAdmin,
+       //userIsAuthenticated = isAuthenticated,
+       //userIsAdmin = isAdmin,
+       //userNameIs = userName
        userNameIs = userName
    });
-        };
+        }
 
 
 @*<div id="reactcontent"></div>*@
 
 
-
-
-
-@Html.ReactInitJavaScript()
+@*@Html.ReactInitJavaScript()*@
 
 

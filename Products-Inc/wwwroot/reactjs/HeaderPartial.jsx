@@ -1,5 +1,5 @@
 ﻿import { Component, Fragment } from 'react';
-import React from 'React'
+//import React from 'react'
 import Logout from './Logout.jsx';
 import {
     Link
@@ -22,12 +22,12 @@ export default class Headerpart extends Component {
 
     render() {
         return (
-            <header className="item-header">
+            <header>
                 <LoginPartial userIsAuthenticated={this.props.userIsAuthenticated} userNameIs={this.props.userName}
                     isUserAdmin={this.props.userIsAdmin} />
                 {this.props.userIsAuthenticated}
                 {this.props.userIsAdmin}
-                <nav className="navbar navbar-expand-lg navbar-dark">
+                <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
                         <div className="navbar-brand text-info" id="menulogo" alt="Company Logo">
                             <Link to={{pathname: "/", setNrOfProducts: this.props.setNrOfProducts} }><img alt="logo" src="./img/logo.png" /></Link>
@@ -72,7 +72,15 @@ export default class Headerpart extends Component {
                                 </li>
                                 : null }
                                 <li className="nav-item">
-                                    <Link to="/checkout" className="nav-link text-dark"><div><img src="./img/cart.jpg" width="40" height="40" /><div className="bg-success rounded-circle text-center" style={{ position: 'absolute', top: '3em', paddingLeft: '5px', paddingRight: '5px'}}><h3 className="h-30">{this.props.nrOfProducts}</h3></div></div></Link>
+                                    <Link to="/checkout" className="nav-link text-dark shopcarticon">
+                                        <div>
+                                        <img src="./img/cart.jpg" />
+                                            <div className="bg-success rounded-circle text-center" id="shoppingcartnumberitemscircle"
+                                            style={{ position: 'absolute', top: '3em', paddingLeft: '5px', paddingRight: '5px' }}>
+                                                <p id="shoppingcartnumber">{this.props.nrOfProducts}</p>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </li>
                                 {!this.props.userIsAuthenticated ?
                                 <li className="nav-item">
@@ -100,6 +108,7 @@ export default class Headerpart extends Component {
         )
 
     }
+
 
 
 } // class end tag

@@ -6,6 +6,8 @@ namespace Products_Inc.Models.ViewModels
 {
     public class ProductViewModel
     {
+        public int ProductId { get; set; }
+
         public string ProductName { get; set; }
 
 
@@ -17,6 +19,8 @@ namespace Products_Inc.Models.ViewModels
 
         public string ImgPath { get; set; }
 
-        public int ProductId { get; set; }
+        //public List<Product> ProductsList { get; set; } = new List<Product>();
+
+
     }
 }

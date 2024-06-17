@@ -9,7 +9,7 @@ namespace Products_Inc.Models
     {
 
 
-        public OrderProduct() { } // Empty constructor coz of "add-migration" needs that when using entity in core 3.1
+        //public OrderProduct() { } // Empty constructor coz of "add-migration" needs that when using entity in core 3.1
 
         public int OrderProductId { get; set; }
 

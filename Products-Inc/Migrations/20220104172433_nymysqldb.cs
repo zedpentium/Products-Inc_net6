@@ -1,76 +1,104 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace Products_Inc.Migrations
 {
-    public partial class init : Migration
+    public partial class nymysqldb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NormalizedName = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    Id = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NormalizedUserName = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NormalizedEmail = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EmailConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SecurityStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(nullable: true),
-                    ProductDescription = table.Column<string>(nullable: true),
-                    ProductPrice = table.Column<int>(nullable: false),
-                    ImgPath = table.Column<string>(nullable: true)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ProductName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProductDescription = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProductPrice = table.Column<int>(type: "int", nullable: false),
+                    ImgPath = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", maxLength: 85, nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -81,17 +109,21 @@ namespace Products_Inc.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", maxLength: 85, nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClaimValue = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -102,16 +134,21 @@ namespace Products_Inc.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProviderKey = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProviderDisplayName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -122,14 +159,17 @@ namespace Products_Inc.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RoleId = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -146,16 +186,21 @@ namespace Products_Inc.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LoginProvider = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Value = table.Column<string>(type: "varchar(85)", maxLength: 85, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -166,15 +211,17 @@ namespace Products_Inc.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(85)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -183,19 +230,20 @@ namespace Products_Inc.Migrations
                         name: "FK_Orders_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "ShoppingCarts",
                 columns: table => new
                 {
-                    ShoppingCartId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true),
-                    Active = table.Column<bool>(nullable: false),
-                    TransactionComplete = table.Column<bool>(nullable: false)
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(85)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Active = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TransactionComplete = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,23 +252,22 @@ namespace Products_Inc.Migrations
                         name: "FK_ShoppingCarts_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "OrderProducts",
                 columns: table => new
                 {
-                    OrderProductId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false),
-                    Amount = table.Column<int>(nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    OrderProductId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderProducts", x => x.OrderProductId);
+                    table.PrimaryKey("PK_OrderProducts", x => new { x.ProductId, x.OrderId });
                     table.ForeignKey(
                         name: "FK_OrderProducts_Orders_OrderId",
                         column: x => x.OrderId,
@@ -233,17 +280,18 @@ namespace Products_Inc.Migrations
                         principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "ShoppingCartProducts",
                 columns: table => new
                 {
-                    ShoppingCartProductId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ShoppingCartId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false),
-                    Amount = table.Column<int>(nullable: false)
+                    ShoppingCartProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -260,15 +308,16 @@ namespace Products_Inc.Migrations
                         principalTable: "ShoppingCarts",
                         principalColumn: "ShoppingCartId",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "438db5c8-0513-43a0-a84c-cd416c4e3a54", "e88c4ee0-4d9f-4906-a1ac-b291cba7a9e0", "Admin", "ADMIN" },
-                    { "0948bea6-fb82-49c9-8cd8-fec213fe8e8a", "82b37e4f-fb76-4463-9da8-eb69410861ac", "User", "USER" }
+                    { "0948bea6-fb82-49c9-8cd8-fec213fe8e8a", "71f0cd20-6229-4c29-a595-0c4654b5b6f4", "User", "USER" },
+                    { "438db5c8-0513-43a0-a84c-cd416c4e3a54", "7283cf31-50c5-44b8-ac9e-a9cdeb01852e", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -276,10 +325,10 @@ namespace Products_Inc.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "a5e229dc-e939-4262-ba80-48a577b01bc2", 0, "5d103b45-ccbe-4be4-82f0-9e9198b61bd9", "customer1@email.com", false, false, null, "CUSTOMER1@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEPUUyo6SW+aGRKdHi0GepH986q7Y4aPnHhGTqwm/ZvSmHBL9InmHpIOKC3JoSrtfDQ==", null, false, "97b06108-97d7-473b-92ed-2f1292f206ab", false, "Admin" },
-                    { "e8a9d975-d468-40f5-a270-535e9138833e", 0, "7551f87a-b340-40a3-9e8e-e066e3e1e734", "customer1@email.com", false, false, null, "CUSTOMER1@EMAIL.COM", "CUSTOMER1", "AQAAAAEAACcQAAAAEP25VN1BqAdAJHLb/MG7sOkfTkZHV06SKdFEr+rWRXBPe63wSY6YEpNqtueiIwTtoQ==", null, false, "8e4d4030-671d-4b7c-8426-078818aecdf9", false, "customer1" },
-                    { "9e0ec062-60d3-4984-8e1e-8f643fa6cf19", 0, "61d7d318-ebfc-4838-9545-93dd26575ebe", "customer2@email.com", false, false, null, "CUSTOMER2@EMAIL.COM", "CUSTOMER2", "AQAAAAEAACcQAAAAEDGHEgcoZjSveaAFH+ClqRw9sSqysfKbaZi2/mzCq7rDCoDuZx+0WDEu25dQ74zj8Q==", null, false, "96eedfb7-1181-43c5-ae0b-6db67a14be7e", false, "customer2" },
-                    { "5cd3ffb7-c723-434e-97d1-d22fc8fe0fab", 0, "a835ba63-357e-4bd8-b83c-1f4e79948284", "customer3@email.com", false, false, null, "CUSTOMER3@EMAIL.COM", "CUSTOMER3", "AQAAAAEAACcQAAAAEDsEGLYhHSO/fToDfmNmxwUoJJbcPxI2GTfSuOGGBrGoFSh+XX6lBnkMv2P1kvTjGA==", null, false, "00333371-5e8f-4350-b44b-37a9bc23d7b8", false, "customer3" }
+                    { "5e3ec0ae-5d84-4492-af99-2fe7349c0470", 0, "900884b2-905d-4b0d-b4b1-4fc97aad9caf", "customer2@email.com", false, false, null, "CUSTOMER2@EMAIL.COM", "CUSTOMER2", "AQAAAAEAACcQAAAAEF5DolojEjjOqfEgBPoppG1L2mABdfTDOS2fc7nIJYxJNzs7szAN8sFCXzSfAYEllA==", null, false, "41c1ea88-b5a0-4fec-9816-8afe7ec42b43", false, "customer2" },
+                    { "6487e82e-1b04-45a9-ac21-9c0db84b6f80", 0, "f822b075-90dd-484a-9dd4-aff1b7350c38", "customer1@email.com", false, false, null, "CUSTOMER1@EMAIL.COM", "CUSTOMER1", "AQAAAAEAACcQAAAAEJuYVe89crJDARayxVjnNEd1EWuOIH+HdOguxyzP/f6owxTehZ8IMAfE6sv1wJx2fQ==", null, false, "dd999702-e6ab-4fa2-b40f-95da36212b53", false, "customer1" },
+                    { "8b4f163f-342b-47dc-8a03-c7f40fe88543", 0, "8d886e46-5a17-4134-b866-07d956a61acc", "customer3@email.com", false, false, null, "CUSTOMER3@EMAIL.COM", "CUSTOMER3", "AQAAAAEAACcQAAAAEPkmOax8uVUReFvDNvPhMoXJuFF6FW20HnjbmHnxuwD9x0pj8/76Yt28Cy5pFo6IPA==", null, false, "51e14a6a-2e86-4707-8b23-aa185f905245", false, "customer3" },
+                    { "c565ba40-a27a-4818-99f0-5940da6cc2ae", 0, "40b62c28-49e8-455b-bde6-c5f0962b727f", "customer1@email.com", false, false, null, "CUSTOMER1@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEBS4beZJZRR8R/Ph4NCMf3p4I29SSITXSNaO4QuY5uHxIU0MO32M8tIv3wIavkfo9A==", null, false, "8e18a28b-850c-4def-8b6a-161354c8d3d7", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -299,14 +348,14 @@ namespace Products_Inc.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
-                columns: new[] { "UserId", "RoleId" },
+                columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "a5e229dc-e939-4262-ba80-48a577b01bc2", "438db5c8-0513-43a0-a84c-cd416c4e3a54" },
-                    { "a5e229dc-e939-4262-ba80-48a577b01bc2", "0948bea6-fb82-49c9-8cd8-fec213fe8e8a" },
-                    { "e8a9d975-d468-40f5-a270-535e9138833e", "0948bea6-fb82-49c9-8cd8-fec213fe8e8a" },
-                    { "9e0ec062-60d3-4984-8e1e-8f643fa6cf19", "0948bea6-fb82-49c9-8cd8-fec213fe8e8a" },
-                    { "5cd3ffb7-c723-434e-97d1-d22fc8fe0fab", "0948bea6-fb82-49c9-8cd8-fec213fe8e8a" }
+                    { "0948bea6-fb82-49c9-8cd8-fec213fe8e8a", "5e3ec0ae-5d84-4492-af99-2fe7349c0470" },
+                    { "0948bea6-fb82-49c9-8cd8-fec213fe8e8a", "6487e82e-1b04-45a9-ac21-9c0db84b6f80" },
+                    { "0948bea6-fb82-49c9-8cd8-fec213fe8e8a", "8b4f163f-342b-47dc-8a03-c7f40fe88543" },
+                    { "0948bea6-fb82-49c9-8cd8-fec213fe8e8a", "c565ba40-a27a-4818-99f0-5940da6cc2ae" },
+                    { "438db5c8-0513-43a0-a84c-cd416c4e3a54", "c565ba40-a27a-4818-99f0-5940da6cc2ae" }
                 });
 
             migrationBuilder.InsertData(
@@ -314,29 +363,29 @@ namespace Products_Inc.Migrations
                 columns: new[] { "OrderId", "UserId" },
                 values: new object[,]
                 {
-                    { 2, "e8a9d975-d468-40f5-a270-535e9138833e" },
-                    { 3, "9e0ec062-60d3-4984-8e1e-8f643fa6cf19" },
-                    { 4, "9e0ec062-60d3-4984-8e1e-8f643fa6cf19" },
-                    { 1, "5cd3ffb7-c723-434e-97d1-d22fc8fe0fab" }
+                    { 1, "8b4f163f-342b-47dc-8a03-c7f40fe88543" },
+                    { 2, "6487e82e-1b04-45a9-ac21-9c0db84b6f80" },
+                    { 3, "5e3ec0ae-5d84-4492-af99-2fe7349c0470" },
+                    { 4, "5e3ec0ae-5d84-4492-af99-2fe7349c0470" }
                 });
 
             migrationBuilder.InsertData(
                 table: "OrderProducts",
-                columns: new[] { "OrderProductId", "Amount", "OrderId", "ProductId" },
+                columns: new[] { "OrderId", "ProductId", "Amount", "OrderProductId" },
                 values: new object[,]
                 {
-                    { 4, 6, 2, 52 },
-                    { 5, 1, 2, 54 },
-                    { 6, 2, 2, 56 },
-                    { 7, 9, 3, 55 },
-                    { 8, 1, 3, 57 },
-                    { 9, 3, 3, 51 },
-                    { 10, 5, 4, 52 },
-                    { 11, 3, 4, 53 },
-                    { 12, 1, 4, 55 },
-                    { 1, 4, 1, 50 },
-                    { 2, 2, 1, 52 },
-                    { 3, 1, 1, 57 }
+                    { 1, 50, 4, 1 },
+                    { 3, 51, 3, 9 },
+                    { 1, 52, 2, 2 },
+                    { 2, 52, 6, 4 },
+                    { 4, 52, 5, 10 },
+                    { 4, 53, 3, 11 },
+                    { 2, 54, 1, 5 },
+                    { 3, 55, 9, 7 },
+                    { 4, 55, 1, 12 },
+                    { 2, 56, 2, 6 },
+                    { 1, 57, 1, 3 },
+                    { 3, 57, 1, 8 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -348,8 +397,7 @@ namespace Products_Inc.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -375,18 +423,12 @@ namespace Products_Inc.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderProducts_OrderId",
                 table: "OrderProducts",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderProducts_ProductId",
-                table: "OrderProducts",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",

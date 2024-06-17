@@ -10,7 +10,7 @@ import {
 
 
 
-export default class CreateUser extends Component{
+export default class AdminCreateUser extends Component{
     state = {
         user: {
             userName: "",

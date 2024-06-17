@@ -2,7 +2,7 @@ import { Component, Fragment } from 'react';
 import Register from './Register.jsx';
 
 
-export default class AdminRegister extends Component{
+export default class AdminRegisterUser extends Component{
     render(){
         return (
             <div>

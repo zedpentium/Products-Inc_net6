@@ -118,19 +118,23 @@ namespace Products_Inc.Models.Services
             return GetUserViewModel(user);
         }
 
-        public async Task<UserViewModel> Login(LoginModel login)
+        public async Task<UserViewModel> Login(LoginModel loginModel)
         {
-            User user = await _userManager.FindByNameAsync(login.UserName);
+            User user = await _userManager.FindByNameAsync(loginModel.UserName);
 
             if (user != null)
             {
-                var signInResult = _signInManager.PasswordSignInAsync(user, login.Password, login.RememberMe, false);
+                Task<SignInResult> signInResult = _signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe, false);
 
                 if (signInResult.Result.Succeeded)
                 {
-                    var rolesRes = await _userManager.GetRolesAsync(user);
-                    var roles = rolesRes.ToList();
-                    return GetUserViewModel(user, roles);
+                    //UserViewModel userViewModel = new UserViewModel();
+                    //userViewModel.Roles = await _userManager.GetRolesAsync(user);
+                    //userViewModel { Id = user.Id, UserName = user.UserName, Email = user.Email };
+
+                    List<string> userRoles = await _userManager.GetRolesAsync(user) as List<string>;
+
+                    return GetUserViewModel(user, userRoles);
                 }
                 else
                 {
@@ -138,18 +142,21 @@ namespace Products_Inc.Models.Services
                 }
             }
 
-            throw new EntityNotFoundException("User with username " + login.UserName + " not found");
+            throw new EntityNotFoundException("User with username " + loginModel.UserName + " not found");
         }
+
 
         public async void Logout()
         {
             await _signInManager.SignOutAsync();
         }
 
+
         public bool Remove(int id)
         {
             throw new NotImplementedException();
         }
+
 
         public async Task<UserViewModel> Update(string userId, UpdateUserViewModel updateModel, bool login)
         {
@@ -199,17 +206,7 @@ namespace Products_Inc.Models.Services
 
         }
 
-        static public UserViewModel GetUserViewModel(User user)
-        {
-            return new UserViewModel() { Id = user.Id, UserName = user.UserName, Email = user.Email };
-        }
-
-        static public UserViewModel GetUserViewModel(User user, List<string> roles)
-        {
-            return new UserViewModel() { Roles = roles, Id = user.Id, UserName = user.UserName, Email = user.Email };
-        }
-
-
+ 
 
         public List<UserViewModel> GetAllUsers()
         {
@@ -240,6 +237,22 @@ namespace Products_Inc.Models.Services
             return GetUserViewModel(user, roles);
         }
 
-       
+
+
+
+
+        // ---------------  Taking the info fetched, and putting it into the UserViewModel ------ 
+
+        static public UserViewModel GetUserViewModel(User user)
+        {
+            return new UserViewModel() { Id = user.Id, UserName = user.UserName, Email = user.Email };
+        }
+
+        static public UserViewModel GetUserViewModel(User user, List<string> roles)
+        {
+            return new UserViewModel() { Roles = roles, Id = user.Id, UserName = user.UserName, Email = user.Email };
+        }
+
+
     }
 }

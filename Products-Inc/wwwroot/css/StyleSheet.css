@@ -1,57 +1,69 @@
 ﻿body {
     position: relative;
     width: 1024px;
-    height: 4000px;
+    /*height: 4000px;*/
     margin: 0 auto;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    background-color:white;
+    background-color: #4e4e4e;
 }
 
 
 
-.item-header {
-    grid-area: headerarea;
-    position: fixed;
-    height: 95px;
-    width: 1024px;
-    background-color: #dc3545;
-    /*border: 1px solid black;*/
-    z-index: 900;
-}
+/* ---------- Grid Layout whole site - Start */
 
-
-.item-reactcontent {
-    grid-area: content;
-    color: #000
-    /*    border: 1px solid black;*/
-}
-
-.item-footer {
-    grid-area: footerarea;
-    position: fixed;
-    bottom: 0px;
-    width: 1024px;
-    white-space: nowrap;
-    background-color: #dc3545;
-    line-height: 60px; /* Vertically center the text there */
-}
-
-
-.pagewrapper {
-    height: 4000px;
+#pagegridwrapper {
+    height: 100vh;
     /*    color: black;*/
     background-color: #87898A;
     display: grid;
-    grid-template-columns: 200px 800px;
-    grid-template-rows: 95px 1000px 60px;
+    grid-template-columns: 1004px;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
-        'headerarea headerarea'
-        'content content'
-        'footerarea footerarea';
+        'header-area'
+        'content-area'
+        'footer-area';
 }
 
+    #pagegridwrapper > header {
+        grid-area: header-area;
+        width: 1024px;
+        height: 95px;
+        background-color: #dc3545;
+        border: 1px solid black;
+        z-index: 900;
+    }
+
+
+    #pagegridwrapper > reactcontent {
+        grid-area: content-area;
+        overflow: auto;
+        width: 1000px;
+        color: #000;
+        padding: 10px 2px 2px 10px;
+    }
+
+    #pagegridwrapper > footer {
+        grid-area: footer-area;
+        /*position: fixed;*/
+        /*        bottom: 0px;*/
+        width: 1024px;
+        height: 60px;
+        white-space: nowrap;
+        background-color: #dc3545;
+
+    }
+
+.footertext {
+    text-align: center;
+    line-height: 58px; /* Vertically center the text there */
+}
+
+/* ---------- Grid Layout color-profile whole site - End */
+
+
+/* ---------- navbar in the header - start */
 #navmenubox {
     height: 120px;
 }
@@ -114,6 +126,44 @@
     z-index: 990;
 }
 
+
+/* shoppingCart */
+.shopcarticon img {
+    width: 40px;
+    height: 40px;
+}
+
+/* shoppingcartnumberitems */
+#shoppingcartnumberitemscircle {
+    width: 17px;
+    height: 17px;
+}
+
+#shoppingcartnumber {
+    font-size: 12px;
+}
+
+/* ---------- navbar in the header - end */
+
+
+
+
+/* ---------- carosel in the contect-area - Start */
+.carouseldiv {
+    width: 100%;
+    height: 200px;
+}
+
+.carouselImage { 
+    width: 80%;
+    margin:auto;
+    height: 200px;
+}
+/* ---------- carosel in the contect-area - End */
+
+
+
+
 .formlogin {
     width: 400px;
     z-index: 990;
@@ -131,10 +181,7 @@
 }
 */
 
-/*.container {
-    padding: 0px;
-    margin-top: -17px;
-}*/
+
 
 .optionBtnGreen {
     background-color: #2CD32C;
@@ -168,55 +215,55 @@
 
 
 
-/*
-    Ramya CSS code 
-*/
-/*carosel style below here */
-.carouselImage {
-    height: 300px;
-    width: 100%;
-}
-
 .quotes {
     font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
 
-.content {
-    margin: -16px -24px 0px 0px;
-}
 
-/*CSS to Products.jsx file*/
-.wrapper {
-    display: grid;
-    grid-template-columns: 150px 100px;
-    grid-template-rows: 5px auto auto 5px;
-    color:white;
-}
-.wrapper .product-info{
-    grid-row: 2/3;
-}
-.wrapper .product-input{
-    grid-row: 3/4;
-}
-.wrapper input{
-    width: 60%;
-}
-.product {
-    width: 20vw;
-    padding: 3px;
-    padding: 20px 20px 20px 20px;
-}
 
-.product:hover {
-    border: 1px solid white;
+/* ---------- CSS for Products.jsx file - start */
+.productdiv {
+    width: 350px;
+    height: 400px;
+    padding: 10px 10px 10px 10px;
+    margin: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
 }
 
 .product-img {
-    max-width: 100%;
+    /*max-width: 150px;*/
+    height: 200px;
     display: block;
     margin: auto;
-    height: 250px;
 }
+
+.producttextwrapper {
+    /*    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 2fr 2fr;*/
+
+    color: white;
+}
+
+    .producttextwrapper:hover {
+        border: 1px solid white;
+    }
+
+
+    .producttextwrapper .product-info{
+        height: 100px;
+    }
+    .producttextwrapper .product-input{
+        height: 60px;
+    }
+
+    .producttextwrapper input{
+        width: 60px;
+    }
+/* ---------- CSS for Products.jsx file - end */
+
+
 
 .contents {
     color: black;
@@ -225,8 +272,7 @@
 }
 
 
-/*dropdown menu styling in the Header*/
-
+/*dropdown menu styling in the Header - Start */
 .dropbtn {
     background-color: #dc3545;
     color: white;
@@ -269,8 +315,10 @@
 .dropdown:hover .dropbtn {
     background-color: #dc3545;
 }
+/*dropdown menu styling in the Header - End */
 
-/*Register page Css*/
+
+/* ---------- Register page Css - start */
 .btn {
     background-color: #dc3545;
     float: right;
@@ -307,8 +355,11 @@
     padding-left: 100px;
     color:white;
 }
+/* ---------- Register page Css - end */
 
-/*Css to Login.jsx*/
+
+
+/* ---------- Css to Login.jsx - start */
 .form-check {
     padding-left: 120px;
     color:white;
@@ -321,19 +372,27 @@
     float: left;
     background-color: #dc3545;
 }
+/* ---------- Css to Login.jsx - end */
 
-/*Css to UserDetails.jsx*/
+
+
+/* ----------  Css to UserDetails.jsx*/
 .savePasswordButtonDiv {
     padding-left: 180px;
 }
 
-/*Css to ContactUs.jsx*/
+
+
+
+/* ----------  Css to ContactUs.jsx*/
 .contact_us_contents{
     color:white;
     padding-left:100px;
 }
 
-/*Css To AdminProducts*/
+
+
+/* ---------- Css To AdminProducts - start */
 .admineditorder_img {
     width: 70px;
     height: 70px;
@@ -342,8 +401,8 @@
     background-color: #dc3545;
     color:white;
 }
-.table{
-    margin-left:12px;
+.table {
+    width: 96%;
 }
 .allProductBtn{
     float:left;
@@ -370,161 +429,11 @@
 .deleteBtn {
     margin-right: 16px;
 }
-
-/*
-Ramya CSS code
-*/
-/*carosel style below here */
-.carouselImage {
-    height: 300px;
-    width: 100%;
-}
+/* ---------- Css To AdminProducts - end */
 
 
 
-.quotes {
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-}
-
-
-
-.content {
-    margin: -16px -24px 0px 0px;
-}
-
-
-
-/*CSS to Products.jsx file*/
-.wrapper {
-    display: grid;
-    grid-template-columns: 150px 100px;
-    color: white;
-}
-
-.product {
-    width: 20vw;
-    padding: 3px;
-    padding: 20px 20px 20px 20px;
-}
-
-
-
-    .product:hover {
-        border: 1px solid white;
-    }
-
-
-
-.product-img {
-    max-width: 100%;
-    display: block;
-    margin: auto;
-    height: 250px;
-}
-
-
-
-.contents {
-    color: black;
-    text-align-last: left;
-    line-height: 3px;
-}
-
-
-
-
-/*dropdown menu styling in the Header*/
-
-
-
-.dropbtn {
-    background-color: #dc3545;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #dc3545;
-    opacity: .8;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-
-
-    .dropdown-content a {
-        color: white;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-
-
-        .dropdown-content a:hover {
-            background-color: #dc3545
-        }
-
-
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/*Adding CSs to User Details Pages*/
-.myDetailsBtn{
-    margin-bottom:30px;
-    margin-right:100px;
-}
-.userDetailsRow{
-    padding-left:22px;
-}
-.totalPriceCheckoutDiv h3{
-    color:white;
-}
-Link{
-    text-decoration:none;
-}
-.editUserPageRoles{
-    color:white;
-    padding-left:100px;
-}
-.myOrdersBtn{
-    width:130px;
-}
-.orderSucessPage{
-    color:white;
-    text-align:center;
-}
-.orderSucessPage ul{
-    list-style-type:none;
-}
-.printReciptBtn {
-    margin-right: 130px;
-}
-.addNumberOfItems {
-    width: 50px;
-    margin-right: 5px;
-}
-.loginPartialDiv{
-    color:white;
-}
-/*Admin Edit Orders*/
+/* ---------- Admin Edit Orders*/
 .adminEditOrder{
     color:white;
     margin-left:100px;
@@ -534,4 +443,11 @@ Link{
 }
 .saveAndBackBtnDiv{
     margin-right:50px;
+}
+
+
+
+
+.quotes {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }

@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {Link} from 'react-router-dom';
 
-export default class AddRoles extends Component{
+export default class AdminEditUserRoles extends Component{
     state = {
         roles: [],
         user: {

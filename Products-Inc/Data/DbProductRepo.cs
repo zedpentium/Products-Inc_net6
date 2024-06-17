@@ -35,7 +35,12 @@ namespace Products_Inc.Data
 
         public List<Product> Read()
         {
-            List<Product> pList = _productListContext.Products.ToList();
+            List<Product> pList = _productListContext.Products
+            //.Include(d => d.OrderProducts)
+            //.Include(e => e.City.Country)
+            //.Include(f => f.Orders)
+            .ToList();
+
 
             return pList;
         }

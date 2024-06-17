@@ -31,7 +31,7 @@ export default class AdminOrders extends Component {
             xhr.open('get', "api/order", true)
             xhr.onload = () => {
                 const allorderslist = JSON.parse(xhr.responseText)
-                console.log(allorderslist)
+                //console.log(allorderslist)
                 this.setState({ allorders: allorderslist })
 
             }

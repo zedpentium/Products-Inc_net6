@@ -20,6 +20,10 @@ using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
 using Microsoft.AspNetCore.Http;
 using Products_Inc.Models.Exceptions;
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
+using Microsoft.Extensions.Logging;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 
 namespace Products_Inc
 {
@@ -27,10 +31,10 @@ namespace Products_Inc
     {
         public IWebHostEnvironment Environment { get;  }
         public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment iWebHostEnvironment)
         {
             Configuration = configuration;
-            Environment = environment;
+            Environment = iWebHostEnvironment;
         }
 
 
@@ -39,28 +43,44 @@ namespace Products_Inc
         {
 
 
-            // -------- DBContexts etc start-------
+            // -------- DBContexts etc start------- For MySQL server 8.0.27
+
+            //var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("ProductIncConnection")));
+                 //options.UseSqlServer(
+                 //    Configuration.GetConnectionString("ProductIncConnection")));
+
+                 options.UseSqlServer(
+                     Configuration.GetConnectionString("ProductIncConnection"))
+                     //, serverVersion)
+                // The following three options help with debugging, but should
+                // be changed or removed for production.
+                //.LogTo(Console.WriteLine, LogLevel.Information)
+                //.EnableSensitiveDataLogging()
+                //.EnableDetailedErrors()
+        );
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+
+            //---- for react
+
             services.AddReact();
 
             services.AddJsEngineSwitcher(options =>
             {
                 options.DefaultEngineName = V8JsEngine.EngineName;
                 options.EngineFactories.AddV8();
-            }
-            );
+            } );
 
 
 
 
             // ------ Identity part start ------------
        
-
 
             services.AddIdentity<User, IdentityRole>(o =>
                 o.SignIn.RequireConfirmedAccount = false)
@@ -77,29 +97,31 @@ namespace Products_Inc
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 1;
 
-
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             });
 
 
+            // ------ Cookie for Redux + store keys + protected -------------------
+
+            var keysFolder = Path.Combine(Environment.ContentRootPath, "Keys");
+
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
+                .SetApplicationName("SharedCookieApp");
+
             services.ConfigureApplicationCookie(options =>
             {
+                options.Cookie.Name = ".AspNet.productincproject.er";
                 options.LoginPath = $"/user/login";
                 options.LogoutPath = $"/user/logout";
                 options.AccessDeniedPath = $"/user/accessdenied";
             });
 
-            
+           
 
-
-            // -- Database
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("ProductIncConnection")));
-
-
+            // ----- DI stuff ----
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
@@ -110,11 +132,16 @@ namespace Products_Inc
             services.AddScoped<IOrderRepo, DbOrderRepo>(); 
             services.AddScoped<IProductRepo, DbProductRepo>();
 
+
+
             services.AddRazorPages();
 
             services.AddControllers(options =>
-    options.Filters.Add(new HttpResponseExceptionFilter()));
+            options.Filters.Add(new HttpResponseExceptionFilter()));
         }
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -123,7 +150,7 @@ namespace Products_Inc
             {
 
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
             }
             else
             {
@@ -143,12 +170,12 @@ namespace Products_Inc
                     .SetLoadReact(false)
                     .SetReactAppBuildPath("~/reactjs/dist")
                     .AddScriptWithoutTransform("~/reactjs/dist/runtime.js")
-  .AddScriptWithoutTransform("~/reactjs/dist/vendor.js")
-  .AddScriptWithoutTransform("~/reactjs/dist/main.js");
-
-
+                    .AddScriptWithoutTransform("~/reactjs/dist/vendor.js")
+                    .AddScriptWithoutTransform("~/reactjs/dist/main.js");
 
             });
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -165,9 +192,9 @@ namespace Products_Inc
                 endpoints.MapControllerRoute("default", "{path?}", new { controller = "Home", action = "Index" });
 
 
-                endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}");
+                //endpoints.MapControllerRoute(
+                //name: "default",
+                //pattern: "{controller=Home}/{action=Index}");
 
                 endpoints.MapRazorPages();
 

@@ -11,7 +11,7 @@ import {
 export default class ContactUs extends Component{
     
     render() {
-        $(window).scrollTop(0)
+        //$(window).scrollTop(0)
         return (
             <div className="contact_us_contents">
                 <h4><b>Contact Us at:</b></h4>

@@ -1,5 +1,5 @@
 {
-  "name": "Eric R,Daniella,Ramya school project. Continued development by Eric, ReWorked to net 6",
+  "name": "Eric,Daniella,Ramya school project. Remade to net 6",
   "version": "0.9.0",
   "main": "Index.jsx",
   "license": "MIT",
@@ -7,8 +7,6 @@
     "build": "rimraf wwwroot/dist && webpack"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.6.2",
-    "axios": "^0.24.0",
     "emotion": "^9.2.12",
     "emotion-server": "^9.2.12",
     "js-cookie": "^3.0.1",
@@ -17,11 +15,11 @@
     "react-emotion": "^9.2.12",
     "react-helmet": "^6.0.0",
     "react-jss": "^8.6.1",
-    "react-redux": "^7.2.6",
+    //"react-redux": "^7.2.6",
     "react-router-dom": "^5.0.0",
     "react-select": "^3.0.4",
     "reactstrap": "^8.0.0",
-    "redux": "^4.1.2",
+    //"redux-devtools-extension": "^2.13.9",
     "styled-components": "^4.0.0"
   },
   "devDependencies": {
@@ -33,7 +31,6 @@
     "@babel/preset-react": "7.8.3",
     "babel-loader": "8.0.6",
     "babel-runtime": "6.26.0",
-    "redux-devtools-extension": "^2.13.9",
     "rimraf": "3.0.2",
     "webpack": "4.43.0",
     "webpack-cli": "3.3.12",

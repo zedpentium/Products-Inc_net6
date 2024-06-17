@@ -15,6 +15,7 @@ namespace Products_Inc.Data
         { }
 
 
+        // Database table list 
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
@@ -28,34 +29,99 @@ namespace Products_Inc.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // -------- Old Core EF 3.1 code. The Code below, replaces this /2021-11-15 - ER
+            //// Setting Primarykeys, instead of [Key] in code. One place to handle all of it /ER
+            //modelBuilder.Entity<Product>()
+            //    .HasKey(mb => mb.ProductId);
+            ////.HasName("PrimaryKey_PersonId"); // for reference that i CAN change the name /ER
 
-            // Setting Primarykeys, instead of [Key] in code. One place to handle all of it /ER
-            modelBuilder.Entity<Product>()
-                .HasKey(mb => mb.ProductId);
-            //.HasName("PrimaryKey_PersonId"); // for reference that i CAN change the name /ER
+            //modelBuilder.Entity<Order>()
+            //    .HasKey(mb => mb.OrderId);
 
+            //modelBuilder.Entity<Order>()
+            //     .HasOne<User>(mb => mb.User)
+            //     .WithMany(m => m.Orders)
+            //     .HasForeignKey(mb => mb.UserId);
+
+
+            // MUST LIMIT keys for MySQL
+            int stringMaxLength = 85;
+            // User IdentityRole and IdentityUser in case you haven't extended those classes
+            modelBuilder.Entity<User>(x => x.Property(m => m.Id).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<User>(x => x.Property(m => m.NormalizedEmail).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<User>(x => x.Property(m => m.NormalizedUserName).HasMaxLength(stringMaxLength));
+
+            //modelBuilder.Entity<IdentityUser>(entity => entity.Property(m => m.Id).HasMaxLength(stringMaxLength));
+            //modelBuilder.Entity<IdentityUser>(entity => entity.Property(m => m.NormalizedEmail).HasMaxLength(stringMaxLength));
+            //modelBuilder.Entity<IdentityUser>(entity => entity.Property(m => m.NormalizedUserName).HasMaxLength(stringMaxLength));
+
+            modelBuilder.Entity<IdentityRole>(entity => entity.Property(m => m.Id).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityRole>(entity => entity.Property(m => m.NormalizedName).HasMaxLength(stringMaxLength));
+
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity => entity.Property(m => m.LoginProvider).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity => entity.Property(m => m.ProviderKey).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity => entity.Property(m => m.UserId).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserRole<string>>(entity => entity.Property(m => m.UserId).HasMaxLength(stringMaxLength));
+
+            modelBuilder.Entity<IdentityUserRole<string>>(entity => entity.Property(m => m.RoleId).HasMaxLength(stringMaxLength));
+
+            modelBuilder.Entity<IdentityUserToken<string>>(entity => entity.Property(m => m.UserId).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserToken<string>>(entity => entity.Property(m => m.LoginProvider).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserToken<string>>(entity => entity.Property(m => m.Name).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserToken<string>>(entity => entity.Property(m => m.Value).HasMaxLength(stringMaxLength));
+
+            modelBuilder.Entity<IdentityUserClaim<string>>(entity => entity.Property(m => m.Id).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityUserClaim<string>>(entity => entity.Property(m => m.UserId).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.Id).HasMaxLength(stringMaxLength));
+            modelBuilder.Entity<IdentityRoleClaim<string>>(entity => entity.Property(m => m.RoleId).HasMaxLength(stringMaxLength));
+
+
+
+
+
+
+
+
+
+
+
+
+            // New .net Core EF 5 and 6 many-to-many code // 2021-11-15 - ER
             modelBuilder.Entity<Order>()
-                .HasKey(mb => mb.OrderId);
+            .HasMany(p => p.Products)
+            .WithMany(p => p.Orders)
+            .UsingEntity<OrderProduct>(
+                j => j
+                    .HasOne(pt => pt.Product)
+                    .WithMany(t => t.OrderProducts)
+                    .HasForeignKey(pt => pt.ProductId),
+                j => j
+                    .HasOne(pt => pt.Order)
+                    .WithMany(p => p.OrderProducts)
+                    .HasForeignKey(pt => pt.OrderId),
+                j =>
+                {
+                    j.Property(pt => pt.Amount);
+                    j.HasKey(t => new { t.ProductId, t.OrderId });
+                });
 
-            modelBuilder.Entity<Order>()
-                 .HasOne<User>(mb => mb.User)
-                 .WithMany(m => m.Orders)
-                 .HasForeignKey(mb => mb.UserId);
 
 
-            // Setting up the join-table for the mutual many-to-many bind/relationship
-            modelBuilder.Entity<OrderProduct>()  // EF Core 3.x specific. Join table /ER
-               .HasKey(pl => new { pl.OrderId, pl.ProductId });
 
-            modelBuilder.Entity<OrderProduct>()   // First One to Many
-                .HasOne<Product>(op => op.Product)
-                .WithMany(o => o.OrderProducts)
-                .HasForeignKey(op => op.ProductId);
+            // -------- Old Core EF 3.1 code. The Code above replaces this /2021-11-15 - ER
+            //// Setting up the join-table for the mutual many-to-many bind/relationship
+            //modelBuilder.Entity<OrderProduct>()  // EF Core 3.x specific. Join table /ER
+            //   .HasKey(pl => new { pl.OrderId, pl.ProductId });
 
-            modelBuilder.Entity<OrderProduct>()
-                .HasOne<Order>(op => op.Order)
-                .WithMany(o => o.OrderProducts)
-                .HasForeignKey(op => op.OrderId);
+            //modelBuilder.Entity<OrderProduct>()   // First One to Many
+            //    .HasOne<Product>(op => op.Product)
+            //    .WithMany(o => o.OrderProducts)
+            //    .HasForeignKey(op => op.ProductId);
+
+            //modelBuilder.Entity<OrderProduct>()
+            //    .HasOne<Order>(op => op.Order)
+            //    .WithMany(o => o.OrderProducts)
+            //    .HasForeignKey(op => op.OrderId);
 
 
 

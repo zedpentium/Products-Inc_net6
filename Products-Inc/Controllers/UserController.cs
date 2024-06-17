@@ -67,11 +67,11 @@ namespace Products_Inc.Controllers
             {
                 UserViewModel user = await _userService.Login(loginModel);
                 
-                if(this.Request.Cookies["shopping-cart"] != null && !string.IsNullOrEmpty(this.Request.Cookies["shopping-cart"]))
-                {
-                    CreateShoppingCartViewModel shoppingCart = GetCreateShoppingCartModel(user.Id, JsonConvert.DeserializeObject<ShoppingCartViewModel>(this.Request.Cookies["shopping-cart"]));
-                    this.Response.Cookies.Append("shopping-cart", JsonConvert.SerializeObject(_shoppingCartService.Create(shoppingCart)));
-                }
+                //if(this.Request.Cookies["shopping-cart"] != null && !string.IsNullOrEmpty(this.Request.Cookies["shopping-cart"]))
+                //{
+                //    CreateShoppingCartViewModel shoppingCart = GetCreateShoppingCartModel(user.Id, JsonConvert.DeserializeObject<ShoppingCartViewModel>(this.Request.Cookies["shopping-cart"]));
+                //    this.Response.Cookies.Append("shopping-cart", JsonConvert.SerializeObject(_shoppingCartService.Create(shoppingCart)));
+                //}
 
                 return new OkObjectResult(user);
             }

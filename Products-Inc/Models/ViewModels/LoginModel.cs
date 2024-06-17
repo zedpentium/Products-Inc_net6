@@ -12,13 +12,18 @@ namespace Products_Inc.Models.ViewModels
 
         
         [Required]
-        [JsonProperty(PropertyName = "PropertyName")]
+        [JsonProperty(PropertyName = "UserName")]
         public string UserName { get; set; }
+
+
         [Required]
         [JsonProperty(PropertyName = "Password")]
         public string Password { get; set; }
+
+
         [JsonProperty(PropertyName = "RememberMe")]
         public bool RememberMe { get; set; }
+
 
         public LoginModel()
         {

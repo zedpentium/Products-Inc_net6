@@ -52,8 +52,9 @@ namespace Products_Inc.Models
             set { _imgPath = value; }
         }
 
+        public ICollection<Order> Orders { get; set; }
 
-        public List<OrderProduct> OrderProducts { get; set; } // dotnet core 3.1 many-to-many link
+        public List<OrderProduct> OrderProducts { get; set; } // many-to-many link
     }
 
 

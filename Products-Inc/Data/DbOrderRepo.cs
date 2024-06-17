@@ -13,11 +13,11 @@ namespace Products_Inc.Data
 {
     public class DbOrderRepo : IOrderRepo
     {
-        private readonly ApplicationDbContext _orderListContext;
+        private readonly ApplicationDbContext _orderRepo;
 
-        public DbOrderRepo(ApplicationDbContext orderListContext)
+        public DbOrderRepo(ApplicationDbContext orderRepo)
         {
-            _orderListContext = orderListContext;
+            _orderRepo = orderRepo;
 
         }
 
@@ -31,8 +31,8 @@ namespace Products_Inc.Data
                 Amount = op.Amount}).ToList() 
             };
 
-             _orderListContext.Orders.Add(newOrder);
-            _orderListContext.SaveChanges();
+            _orderRepo.Orders.Add(newOrder);
+            _orderRepo.SaveChanges();
 
             return Read(newOrder.OrderId);
         }
@@ -40,7 +40,7 @@ namespace Products_Inc.Data
 
         public List<Order> Read()
         {
-            List<Order> pList = _orderListContext.Orders
+            List<Order> pList = _orderRepo.Orders
                 .Include(f => f.OrderProducts).ThenInclude(g => g.Product)
                 .Include(o => o.User)
                 .ToList();
@@ -50,7 +50,7 @@ namespace Products_Inc.Data
 
         public Order Read(int id)
         {
-            Order order = _orderListContext.Orders
+            Order order = _orderRepo.Orders
                 .Where(c => c.OrderId == id)
                 .Include(f => f.OrderProducts).ThenInclude(g => g.Product)
                 .Include(o => o.User)
@@ -61,13 +61,13 @@ namespace Products_Inc.Data
 
         public List<Order> ReadByUser(string userId)
         {
-            return _orderListContext.Orders.Include(o => o.OrderProducts).ThenInclude(op => op.Product).Where(o => o.UserId.Equals(userId)).ToList();
+            return _orderRepo.Orders.Include(o => o.OrderProducts).ThenInclude(op => op.Product).Where(o => o.UserId.Equals(userId)).ToList();
         }
 
         public Order Update(Order order)
         {
-            _orderListContext.Orders.Update(order);
-            _orderListContext.SaveChanges();
+            _orderRepo.Orders.Update(order);
+            _orderRepo.SaveChanges();
 
             return order;
         }
@@ -76,8 +76,8 @@ namespace Products_Inc.Data
         {
             int nrStates;
 
-            _orderListContext.Orders.Remove(order);
-            nrStates = _orderListContext.SaveChanges();
+            _orderRepo.Orders.Remove(order);
+            nrStates = _orderRepo.SaveChanges();
 
             if (nrStates > 0)
             {
@@ -92,16 +92,16 @@ namespace Products_Inc.Data
         public bool DeleteProduct(int productId)
         {
             OrderProduct orderProduct = ReadOrderProduct(productId);
-           
-            _orderListContext.OrderProducts.Remove(orderProduct);
-            _orderListContext.SaveChanges();
+
+            _orderRepo.OrderProducts.Remove(orderProduct);
+            _orderRepo.SaveChanges();
             return true;
     
         }
 
         public OrderProduct ReadOrderProduct(int productId)
         {
-            OrderProduct orderProduct = _orderListContext.OrderProducts.Include(op => op.Product).Where(op => op.OrderProductId == productId).FirstOrDefault();
+            OrderProduct orderProduct = _orderRepo.OrderProducts.Include(op => op.Product).Where(op => op.OrderProductId == productId).FirstOrDefault();
             if (orderProduct != null)
             {
                 return orderProduct;
@@ -116,8 +116,8 @@ namespace Products_Inc.Data
 
             originalOrderProduct.Amount = orderProduct.Amount;
 
-            _orderListContext.OrderProducts.Update(originalOrderProduct);
-            _orderListContext.SaveChanges();
+            _orderRepo.OrderProducts.Update(originalOrderProduct);
+            _orderRepo.SaveChanges();
 
             return ReadOrderProduct(productId);
         }

@@ -1,6 +1,6 @@
 ﻿
 import { Component, Fragment } from 'react';
-import Cookies from 'js-cookies'
+import Cookies from 'js-cookie'
 import {
     Redirect
 } from "react-router-dom";

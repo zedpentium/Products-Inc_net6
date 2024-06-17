@@ -2,9 +2,10 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Products_Inc.Data;
+
+#nullable disable
 
 namespace Products_Inc.Migrations
 {
@@ -15,48 +16,47 @@ namespace Products_Inc.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.20")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "438db5c8-0513-43a0-a84c-cd416c4e3a54",
-                            ConcurrencyStamp = "e88c4ee0-4d9f-4906-a1ac-b291cba7a9e0",
+                            ConcurrencyStamp = "7283cf31-50c5-44b8-ac9e-a9cdeb01852e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "0948bea6-fb82-49c9-8cd8-fec213fe8e8a",
-                            ConcurrencyStamp = "82b37e4f-fb76-4463-9da8-eb69410861ac",
+                            ConcurrencyStamp = "71f0cd20-6229-4c29-a595-0c4654b5b6f4",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -66,110 +66,117 @@ namespace Products_Inc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasMaxLength(85)
+                        .HasColumnType("int");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasMaxLength(85)
+                        .HasColumnType("int");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            UserId = "a5e229dc-e939-4262-ba80-48a577b01bc2",
+                            UserId = "c565ba40-a27a-4818-99f0-5940da6cc2ae",
                             RoleId = "438db5c8-0513-43a0-a84c-cd416c4e3a54"
                         },
                         new
                         {
-                            UserId = "a5e229dc-e939-4262-ba80-48a577b01bc2",
+                            UserId = "c565ba40-a27a-4818-99f0-5940da6cc2ae",
                             RoleId = "0948bea6-fb82-49c9-8cd8-fec213fe8e8a"
                         },
                         new
                         {
-                            UserId = "e8a9d975-d468-40f5-a270-535e9138833e",
+                            UserId = "6487e82e-1b04-45a9-ac21-9c0db84b6f80",
                             RoleId = "0948bea6-fb82-49c9-8cd8-fec213fe8e8a"
                         },
                         new
                         {
-                            UserId = "9e0ec062-60d3-4984-8e1e-8f643fa6cf19",
+                            UserId = "5e3ec0ae-5d84-4492-af99-2fe7349c0470",
                             RoleId = "0948bea6-fb82-49c9-8cd8-fec213fe8e8a"
                         },
                         new
                         {
-                            UserId = "5cd3ffb7-c723-434e-97d1-d22fc8fe0fab",
+                            UserId = "8b4f163f-342b-47dc-8a03-c7f40fe88543",
                             RoleId = "0948bea6-fb82-49c9-8cd8-fec213fe8e8a"
                         });
                 });
@@ -177,31 +184,34 @@ namespace Products_Inc.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Products_Inc.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("OrderId");
 
@@ -213,133 +223,129 @@ namespace Products_Inc.Migrations
                         new
                         {
                             OrderId = 1,
-                            UserId = "5cd3ffb7-c723-434e-97d1-d22fc8fe0fab"
+                            UserId = "8b4f163f-342b-47dc-8a03-c7f40fe88543"
                         },
                         new
                         {
                             OrderId = 2,
-                            UserId = "e8a9d975-d468-40f5-a270-535e9138833e"
+                            UserId = "6487e82e-1b04-45a9-ac21-9c0db84b6f80"
                         },
                         new
                         {
                             OrderId = 3,
-                            UserId = "9e0ec062-60d3-4984-8e1e-8f643fa6cf19"
+                            UserId = "5e3ec0ae-5d84-4492-af99-2fe7349c0470"
                         },
                         new
                         {
                             OrderId = 4,
-                            UserId = "9e0ec062-60d3-4984-8e1e-8f643fa6cf19"
+                            UserId = "5e3ec0ae-5d84-4492-af99-2fe7349c0470"
                         });
                 });
 
             modelBuilder.Entity("Products_Inc.Models.OrderProduct", b =>
                 {
-                    b.Property<int>("OrderProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderProductId");
+                    b.Property<int>("OrderProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "OrderId");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderProducts");
 
                     b.HasData(
                         new
                         {
-                            OrderProductId = 1,
+                            ProductId = 50,
+                            OrderId = 1,
                             Amount = 4,
-                            OrderId = 1,
-                            ProductId = 50
+                            OrderProductId = 1
                         },
                         new
                         {
-                            OrderProductId = 2,
+                            ProductId = 52,
+                            OrderId = 1,
                             Amount = 2,
-                            OrderId = 1,
-                            ProductId = 52
+                            OrderProductId = 2
                         },
                         new
                         {
-                            OrderProductId = 3,
+                            ProductId = 57,
+                            OrderId = 1,
                             Amount = 1,
-                            OrderId = 1,
-                            ProductId = 57
+                            OrderProductId = 3
                         },
                         new
                         {
-                            OrderProductId = 4,
+                            ProductId = 52,
+                            OrderId = 2,
                             Amount = 6,
-                            OrderId = 2,
-                            ProductId = 52
+                            OrderProductId = 4
                         },
                         new
                         {
-                            OrderProductId = 5,
+                            ProductId = 54,
+                            OrderId = 2,
                             Amount = 1,
-                            OrderId = 2,
-                            ProductId = 54
+                            OrderProductId = 5
                         },
                         new
                         {
-                            OrderProductId = 6,
+                            ProductId = 56,
+                            OrderId = 2,
                             Amount = 2,
-                            OrderId = 2,
-                            ProductId = 56
+                            OrderProductId = 6
                         },
                         new
                         {
-                            OrderProductId = 7,
+                            ProductId = 55,
+                            OrderId = 3,
                             Amount = 9,
-                            OrderId = 3,
-                            ProductId = 55
+                            OrderProductId = 7
                         },
                         new
                         {
-                            OrderProductId = 8,
+                            ProductId = 57,
+                            OrderId = 3,
                             Amount = 1,
-                            OrderId = 3,
-                            ProductId = 57
+                            OrderProductId = 8
                         },
                         new
                         {
-                            OrderProductId = 9,
+                            ProductId = 51,
+                            OrderId = 3,
                             Amount = 3,
-                            OrderId = 3,
-                            ProductId = 51
+                            OrderProductId = 9
                         },
                         new
                         {
-                            OrderProductId = 10,
+                            ProductId = 52,
+                            OrderId = 4,
                             Amount = 5,
-                            OrderId = 4,
-                            ProductId = 52
+                            OrderProductId = 10
                         },
                         new
                         {
-                            OrderProductId = 11,
+                            ProductId = 53,
+                            OrderId = 4,
                             Amount = 3,
-                            OrderId = 4,
-                            ProductId = 53
+                            OrderProductId = 11
                         },
                         new
                         {
-                            OrderProductId = 12,
-                            Amount = 1,
+                            ProductId = 55,
                             OrderId = 4,
-                            ProductId = 55
+                            Amount = 1,
+                            OrderProductId = 12
                         });
                 });
 
@@ -347,17 +353,16 @@ namespace Products_Inc.Migrations
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("ImgPath")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ProductDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("ProductPrice")
                         .HasColumnType("int");
@@ -437,17 +442,16 @@ namespace Products_Inc.Migrations
                 {
                     b.Property<int>("ShoppingCartId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("TransactionComplete")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(85)");
 
                     b.HasKey("ShoppingCartId");
 
@@ -460,8 +464,7 @@ namespace Products_Inc.Migrations
                 {
                     b.Property<int>("ShoppingCartProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
@@ -484,129 +487,129 @@ namespace Products_Inc.Migrations
             modelBuilder.Entity("Products_Inc.Models.User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(85)
+                        .HasColumnType("varchar(85)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "a5e229dc-e939-4262-ba80-48a577b01bc2",
+                            Id = "c565ba40-a27a-4818-99f0-5940da6cc2ae",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5d103b45-ccbe-4be4-82f0-9e9198b61bd9",
+                            ConcurrencyStamp = "40b62c28-49e8-455b-bde6-c5f0962b727f",
                             Email = "customer1@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER1@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPUUyo6SW+aGRKdHi0GepH986q7Y4aPnHhGTqwm/ZvSmHBL9InmHpIOKC3JoSrtfDQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBS4beZJZRR8R/Ph4NCMf3p4I29SSITXSNaO4QuY5uHxIU0MO32M8tIv3wIavkfo9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "97b06108-97d7-473b-92ed-2f1292f206ab",
+                            SecurityStamp = "8e18a28b-850c-4def-8b6a-161354c8d3d7",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "e8a9d975-d468-40f5-a270-535e9138833e",
+                            Id = "6487e82e-1b04-45a9-ac21-9c0db84b6f80",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7551f87a-b340-40a3-9e8e-e066e3e1e734",
+                            ConcurrencyStamp = "f822b075-90dd-484a-9dd4-aff1b7350c38",
                             Email = "customer1@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER1@EMAIL.COM",
                             NormalizedUserName = "CUSTOMER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP25VN1BqAdAJHLb/MG7sOkfTkZHV06SKdFEr+rWRXBPe63wSY6YEpNqtueiIwTtoQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJuYVe89crJDARayxVjnNEd1EWuOIH+HdOguxyzP/f6owxTehZ8IMAfE6sv1wJx2fQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8e4d4030-671d-4b7c-8426-078818aecdf9",
+                            SecurityStamp = "dd999702-e6ab-4fa2-b40f-95da36212b53",
                             TwoFactorEnabled = false,
                             UserName = "customer1"
                         },
                         new
                         {
-                            Id = "9e0ec062-60d3-4984-8e1e-8f643fa6cf19",
+                            Id = "5e3ec0ae-5d84-4492-af99-2fe7349c0470",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "61d7d318-ebfc-4838-9545-93dd26575ebe",
+                            ConcurrencyStamp = "900884b2-905d-4b0d-b4b1-4fc97aad9caf",
                             Email = "customer2@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER2@EMAIL.COM",
                             NormalizedUserName = "CUSTOMER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDGHEgcoZjSveaAFH+ClqRw9sSqysfKbaZi2/mzCq7rDCoDuZx+0WDEu25dQ74zj8Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF5DolojEjjOqfEgBPoppG1L2mABdfTDOS2fc7nIJYxJNzs7szAN8sFCXzSfAYEllA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "96eedfb7-1181-43c5-ae0b-6db67a14be7e",
+                            SecurityStamp = "41c1ea88-b5a0-4fec-9816-8afe7ec42b43",
                             TwoFactorEnabled = false,
                             UserName = "customer2"
                         },
                         new
                         {
-                            Id = "5cd3ffb7-c723-434e-97d1-d22fc8fe0fab",
+                            Id = "8b4f163f-342b-47dc-8a03-c7f40fe88543",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a835ba63-357e-4bd8-b83c-1f4e79948284",
+                            ConcurrencyStamp = "8d886e46-5a17-4134-b866-07d956a61acc",
                             Email = "customer3@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER3@EMAIL.COM",
                             NormalizedUserName = "CUSTOMER3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDsEGLYhHSO/fToDfmNmxwUoJJbcPxI2GTfSuOGGBrGoFSh+XX6lBnkMv2P1kvTjGA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPkmOax8uVUReFvDNvPhMoXJuFF6FW20HnjbmHnxuwD9x0pj8/76Yt28Cy5pFo6IPA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "00333371-5e8f-4350-b44b-37a9bc23d7b8",
+                            SecurityStamp = "51e14a6a-2e86-4707-8b23-aa185f905245",
                             TwoFactorEnabled = false,
                             UserName = "customer3"
                         });
@@ -668,6 +671,8 @@ namespace Products_Inc.Migrations
                     b.HasOne("Products_Inc.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Products_Inc.Models.OrderProduct", b =>
@@ -679,10 +684,14 @@ namespace Products_Inc.Migrations
                         .IsRequired();
 
                     b.HasOne("Products_Inc.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("OrderProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Products_Inc.Models.ShoppingCart", b =>
@@ -690,6 +699,8 @@ namespace Products_Inc.Migrations
                     b.HasOne("Products_Inc.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Products_Inc.Models.ShoppingCartProduct", b =>
@@ -705,6 +716,30 @@ namespace Products_Inc.Migrations
                         .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Products_Inc.Models.Order", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("Products_Inc.Models.Product", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("Products_Inc.Models.ShoppingCart", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Products_Inc.Models.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

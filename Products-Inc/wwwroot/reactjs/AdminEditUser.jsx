@@ -5,7 +5,7 @@ import {
 
 
 
-export default class EditUserDetails extends Component{
+export default class AdminEditUser extends Component{
     state = {
         user: { userName: "", id: "", email: ""},
         updateUserDetailsModel: { userName: "", email: "", password: "", confirmPassword: "" },

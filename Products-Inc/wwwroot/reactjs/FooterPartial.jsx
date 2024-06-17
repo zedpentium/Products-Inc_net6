@@ -1,5 +1,5 @@
 ﻿import { Component, Fragment } from 'react';
-import React from 'React'
+//import React from 'React'
 
 
 export default class Footer extends Component {
@@ -11,8 +11,8 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <footer className="item-footer border-top foot text-dark">
-                <div className="container">
+            <footer className="border-top text-dark">
+                <div className="footertext">
                     &copy; 2021 - Products Inc
                 </div>
             </footer>

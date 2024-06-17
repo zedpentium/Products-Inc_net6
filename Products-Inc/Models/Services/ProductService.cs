@@ -6,6 +6,7 @@ using Products_Inc.Models;
 using Products_Inc.Models.ViewModels;
 using Products_Inc.Models.Interfaces;
 using Products_Inc.Models.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Products_Inc.Models.Services
 {
@@ -33,19 +34,17 @@ namespace Products_Inc.Models.Services
             return GetModel(createdProduct);
         }
 
-        public List<ProductViewModel> ReadAll()
+        public List<Product> ReadAll()
         {
-            return _productRepo.Read().Select(p =>
-            GetModel(p)).ToList();
+            //return _productRepo.Read().Select(p =>
+            //GetModel(p)).ToList();
+
+            List<Product> allProducts = new List<Product>();
+            allProducts = _productRepo.Read();
+
+            return allProducts;
         }
 
-        //public List<Product> ReadAll()
-        //{
-
-        //    List<Product> productList = _productRepo.Read();
-        //    Console.WriteLine(productList);
-        //    return productList;
-        //}
 
         public ProductViewModel Update(int id, CreateProductViewModel product)
         {
